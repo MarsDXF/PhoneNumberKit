@@ -452,6 +452,8 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
 
     open func textFieldDidBeginEditing(_ textField: UITextField) {
         print("1", text)
+        print("currentRegion", currentRegion)
+        print("countryCode", phoneNumberKit.countryCode(for: currentRegion)?.description)
         if self.withExamplePlaceholder, self.withPrefix, let countryCode = phoneNumberKit.countryCode(for: currentRegion)?.description, (text ?? "").isEmpty {
             print("countryCode", countryCode)
             text = "+" + countryCode + " "
