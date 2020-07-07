@@ -321,6 +321,7 @@ public final class PhoneNumberKit: NSObject {
             throw PhoneNumberError.metadataNotFound
         }
         let data = try Data(contentsOf: URL(fileURLWithPath: jsonPath))
+        print(data == nil)
         return data
     }
 }
