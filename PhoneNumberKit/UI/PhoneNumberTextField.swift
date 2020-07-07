@@ -451,9 +451,11 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     }
 
     open func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("1", text)
         if self.withExamplePlaceholder, self.withPrefix, let countryCode = phoneNumberKit.countryCode(for: currentRegion)?.description, (text ?? "").isEmpty {
             text = "+" + countryCode + " "
         }
+        print("2", text)
         self._delegate?.textFieldDidBeginEditing?(textField)
     }
 
@@ -462,6 +464,7 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     }
 
     open func textFieldDidEndEditing(_ textField: UITextField) {
+        print("3", text)
         if self.withExamplePlaceholder, self.withPrefix, let countryCode = phoneNumberKit.countryCode(for: currentRegion)?.description,
             let text = textField.text,
             text == internationalPrefix(for: countryCode) {
@@ -470,6 +473,7 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
             self.updateFlag()
             self.updatePlaceholder()
         }
+        print("4", text)
         self._delegate?.textFieldDidEndEditing?(textField)
     }
 
@@ -486,6 +490,7 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
 extension PhoneNumberTextField: CountryCodePickerDelegate {
 
     func countryCodePickerViewControllerDidPickCountry(_ country: CountryCodePickerViewController.Country) {
+        print("5", text)
         text = isEditing ? "+" + country.prefix : ""
         _defaultRegion = country.code
         partialFormatter.defaultRegion = country.code
@@ -497,6 +502,7 @@ extension PhoneNumberTextField: CountryCodePickerDelegate {
         } else {
             containingViewController?.dismiss(animated: true)
         }
+        print("6", text)
     }
 }
 
